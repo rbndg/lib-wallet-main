@@ -18,6 +18,8 @@ const Provider = require('../modules/provider')
 const StateDb = require('../modules/state')
 const WalletPay = require('./wallet-pay')
 
+const { AccountAbstractionError } = require('./errors')
+
 class WalletPayGeneric extends WalletPay {
   constructor (config) {
     super(config)
@@ -340,6 +342,58 @@ class WalletPayGeneric extends WalletPay {
     }
     this.resumeSync()
     this.emit('sync-end')
+  }
+
+  /**
+   * Returns a wallet account's abstracted address.
+   * 
+   * @param {string} address The wallet account's address
+   * @returns {Promise<string>} The abstracted address
+   */
+  async getAbstractedAddress (address) {
+    throw new Error('Method "getAbstractedAddress(address)" must be implemented.');
+  }
+
+  /**
+   * Executes a transaction on a wallet account's abstracted address and returns the tx's id.
+   * 
+   * The abstracted account must own enough tokens to repay the paymaster that sponsored the transaction; otherwise, an {@link AccountAbstractionError} exception is thrown.
+   * 
+   * @param {string} address The wallet account's address
+   * @param {object} tx The transaction to execute on the abstracted account
+   * @param {string} tx.to The recipient of the transaction
+   * @param {string} tx.value The amount of native tokens to send to the recipient
+   * @param {string | undefined} tx.data The data sent along with the transaction
+   * @returns {Promise<string>} The transaction's id
+   */
+  async sendGaslessTransaction (address, tx) {
+    throw new Error('Method "sendGaslessTransaction(address, tx)" must be implemented.');
+  }
+
+  /**
+   * Executes a token transfer on a wallet account's abstracted address and returns the transfer's id.
+   * 
+   * The abstracted account must own enough tokens to repay the paymaster that sponsored the token transfer; otherwise, an {@link AccountAbstractionError} exception is thrown.
+   * 
+   * @param {string} address The wallet account's address
+   * @param {object} transfer The token transfer to execute on the abstracted account
+   * @param {string} transfer.token The token’s identifier (e.g. USDT)
+   * @param {string} transfer.to The recipient of the token transfer
+   * @param {string} transfer.value The amount of tokens to send to the recipient
+   * @returns {Promise<string>} The token transfer's id
+   */
+  async sendGaslessTokenTransfer (address, transfer) {
+    throw new Error('Method "sendGaslessTokenTransfer(address, transfer)" must be implemented.');
+  }
+
+  /**
+   * Returns the receipt of a gasless transaction, or null if the tx has not yet been included in a block.
+   * 
+   * @param {string} id the gasless transaction's id
+   * @returns {Promise<object | null>} The gasless tx's receipt
+   */
+  async getGaslessTransactionReceipt (id) {
+    throw new Error('Method "getGaslessTransactionReceipt(id)" must be implemented.');
   }
 }
 
