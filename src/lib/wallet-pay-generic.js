@@ -357,10 +357,10 @@ class WalletPayGeneric extends WalletPay {
   /**
    * Executes a transaction on a wallet account's abstracted address and returns the tx's id.
    * 
-   * The abstracted address must own enough tokens to repay the paymaster that sponsored the transaction; otherwise, an {@link AccountAbstractionError} exception is thrown.
+   * The abstracted account must own enough tokens to repay the paymaster that sponsored the transaction; otherwise, an {@link AccountAbstractionError} exception is thrown.
    * 
    * @param {string} address The wallet account's address
-   * @param {object} tx The transaction to execute on the abstracted address
+   * @param {object} tx The transaction to execute on the abstracted account
    * @param {string} tx.to The recipient of the transaction
    * @param {string} tx.value The amount of native tokens to send to the recipient
    * @param {string | undefined} tx.data The data sent along with the transaction
@@ -373,11 +373,11 @@ class WalletPayGeneric extends WalletPay {
   /**
    * Executes a token transfer on a wallet account's abstracted address and returns the transfer's id.
    * 
-   * The abstracted address must own enough tokens to repay the paymaster that sponsored the token transfer; otherwise, an {@link AccountAbstractionError} exception is thrown.
+   * The abstracted account must own enough tokens to repay the paymaster that sponsored the token transfer; otherwise, an {@link AccountAbstractionError} exception is thrown.
    * 
    * @param {string} address The wallet account's address
-   * @param {object} transfer The token transfer to execute on the abstracted address
-   * @param {string} transfer.token The token’s address
+   * @param {object} transfer The token transfer to execute on the abstracted account
+   * @param {string} transfer.token The token’s identifier (e.g. USDT)
    * @param {string} transfer.to The recipient of the token transfer
    * @param {string} transfer.value The amount of tokens to send to the recipient
    * @returns {Promise<string>} The token transfer's id
