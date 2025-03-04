@@ -16,6 +16,7 @@ const Currency = require('./src/lib/currency.js')
 const WalletPay = require('./src/lib/wallet-pay.js')
 const Wallet = require('./src/lib/wallet.js')
 const WalletPayGeneric = require('./src/lib/wallet-pay-generic.js')
+const { AccountAbstractionError } = require('./src/lib/errors.js')
 const Provider = require('./src/modules/provider.js')
 const HdWallet = require('./src/modules/hdwallet.js')
 const WalletManager = require('./src/modules/wallet-manager.js')
@@ -29,6 +30,7 @@ module.exports = {
   Provider,
   WalletPay,
   WalletPayGeneric,
+  AccountAbstractionError,
   Wallet,
   HdWallet,
   TetherCurrency,
